@@ -1,71 +1,81 @@
-# Task 1 - Data Cleaning and Preparation
+# Task 3 – Intelligent Feature
 
-## Dataset
-Startup Funding Dataset with information about startup name, industry, country,
-funding stage, amount raised, funding date and number of employees.
+## Smart Support Ticket Classifier
 
-## Objective
-Clean and prepare a raw dataset for analysis by checking:
-- Missing values
-- Duplicate records
-- Incorrect data types
-- Inconsistent categorical values
-- Invalid numeric/date values
+This project adds an intelligent feature that automatically classifies a customer support message into one of four categories:
 
-## Tools Used
-- Python
-- Pandas
-- Excel
+- Technical Issue
+- Billing
+- Account
+- General
 
-## Cleaning Steps
-1. Removed completely blank rows.
-2. Removed exact duplicate records.
-3. Trimmed extra spaces from text fields.
-4. Converted `Amount Raised (USD)` and `Number of Employees` to numeric types.
-5. Converted `Funding Date` to a proper date type.
-6. Checked all columns for missing values.
-7. Checked duplicate records.
-8. Validated Industry, Country and Funding Stage against the values present in the dataset.
-9. Checked that funding amount and employee counts are positive.
+It also includes confidence scoring, input validation, error handling, evaluation examples, failure cases, and a simple Streamlit interface.
 
-## Final Validation
-- Rows: 2000
-- Columns: 7
-- Missing values: 0
-- Duplicate rows remaining: 0
-- Invalid categorical values: 0
-- Invalid numeric values: 0
-- Invalid funding dates: 0
+## Project Structure
 
-## Files
-- `cleaned_startup_funding_dataset.xlsx` - final Excel dataset with Quality Report
-- `cleaned_startup_funding_dataset.csv` - cleaned CSV version
-- `cleaning_log.txt` - cleaning actions and validation summary
+```text
+intelligent_feature_task3/
+├── app.py
+├── classifier.py
+├── evaluate.py
+├── requirements.txt
+├── evaluation_examples.json
+└── README.md
+```
 
-## LinkedIn Video
-For the required Task 1 LinkedIn video, briefly show:
-1. The original dataset/problem statement.
-2. Missing-value check.
-3. Duplicate check.
-4. Data-type validation.
-5. Cleaning steps.
-6. Final cleaned dataset and Quality Report.
+## How to Run
 
-Suggested post text:
+1. Install Python 3.9+.
+2. Install dependencies:
 
-Completed Task 1: Data Cleaning and Preparation
+```bash
+pip install -r requirements.txt
+```
 
-I cleaned and prepared a startup funding dataset for analysis using Python,
-Pandas and Excel. I checked missing values, duplicate records, data types,
-inconsistent categorical values and invalid values, then validated the final
-dataset.
+3. Start the interface:
 
-Key result:
-2000 rows | 7 columns | 0 missing values | 0 duplicate rows remaining
+```bash
+streamlit run app.py
+```
 
-#DataAnalytics #Python #Pandas #Excel #DataCleaning #Internship #Learning
+## Intelligent Feature
 
-## Submission
-Upload this folder to a GitHub repository and submit the repository URL in the
-internship Task Submission Link field. Then publish the LinkedIn video post and
-paste the LinkedIn post URL in the second required field.
+The classifier uses TF-IDF text features and Logistic Regression to identify the intent of a support message.
+
+Example:
+
+Input:
+> I was charged twice for my subscription.
+
+Output:
+> Billing
+
+The application also displays a confidence score.
+
+## Error Handling
+
+The app handles:
+- Empty input
+- Very short input
+- Model prediction errors
+- Unexpected application errors
+
+## Evaluation
+
+The `evaluate.py` file evaluates the model on example test cases and prints accuracy and a classification report.
+
+## Failure Cases
+
+The model may struggle with:
+- Very short messages such as "Help"
+- Messages containing multiple unrelated issues
+- Sarcasm or unclear language
+- New topics that are not represented in the training examples
+
+## Future Improvements
+
+- Use a larger real-world dataset.
+- Add more support categories.
+- Use a transformer/LLM model.
+- Add multilingual support.
+- Store user feedback for continuous evaluation.
